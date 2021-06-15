@@ -32,6 +32,7 @@ myjob:
   image: docker:latest
   script:
     - echo "Running unit tests"
+    - docker --version
   
 
 deploy-job:      # This job runs in the deploy stage.
