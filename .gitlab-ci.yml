@@ -33,6 +33,9 @@ myjob:
   script:
     - echo "Running unit tests"
     - docker --version
+    - docker pull octopusdeploy/octo
+    - docker run --rm octopusdeploy/octo version
+
   
 
 deploy-job:      # This job runs in the deploy stage.
