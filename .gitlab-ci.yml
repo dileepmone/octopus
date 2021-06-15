@@ -23,14 +23,16 @@ unit-test-job:   # This job runs in the test stage.
   stage: test    # It only starts when the job in the build stage completes successfully.
   script:
     - echo "Running unit tests... This will take about 60 seconds."
-    - sleep 60
-    - echo "Code coverage is 90%"
-
+   
 
   
 
 deploy-job:      # This job runs in the deploy stage.
   stage: deploy  # It only runs when *both* jobs in the test stage complete successfully.
+  before_script:
+    - docker run -privileged -t -i jpetazzo/dind
+    - docker run -t -i ubuntu bash
+
   script:
     - docker pull octopusdeploy/octo
     - echo "Deploying application..."
