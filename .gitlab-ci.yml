@@ -21,8 +21,9 @@ build-job:       # This job runs in the build stage, which runs firt.
   script:
     - echo "Compiling the code..."
     - echo "Compile complete."
-    - curl -sSfL https://rpm.octopus.com/octopuscli.repo -o /etc/yum.repos.d/octopuscli.repo
-    - yum install octopuscli
+    - octo create-release --project Demo_Project --server https://mgtechsoft.octopus.app/ --apiKey API-WCYWZTZHUMG1XYT8ZBAQXI57IWITVRB
+    - echo "Deploy Release to UAT....."
+    - octo create-release --project Demo_Project --deployto UAT --server https://mgtechsoft.octopus.app/ --apiKey API-WCYWZTZHUMG1XYT8ZBAQXI57IWITVRB --progress
 
 unit-test-job:   # This job runs in the test stage.
   stage: test    # It only starts when the job in the build stage completes successfully.
@@ -46,7 +47,4 @@ deploy-job:      # This job runs in the deploy stage.
 
   script:
     - echo "Creating Release..."
-    - octo create-release --project Demo_Project --server https://mgtechsoft.octopus.app/ --apiKey API-WCYWZTZHUMG1XYT8ZBAQXI57IWITVRB
-    - echo "Deploy Release to UAT....."
-    - octo create-release --project Demo_Project --deployto UAT --server https://mgtechsoft.octopus.app/ --apiKey API-WCYWZTZHUMG1XYT8ZBAQXI57IWITVRB --progress
     
