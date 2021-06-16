@@ -41,11 +41,11 @@ myjob:
 deploy-job:      # This job runs in the deploy stage.
   stage: deploy  # It only runs when *both* jobs in the test stage complete successfully.
   before_script:
-    - docker run -privileged -t -i jpetazzo/dind
-    - docker run -t -i ubuntu bash
+    - docker run octopusdeploy/octo
 
   script:
-    - docker pull octopusdeploy/octo
-    - echo "Deploying application..."
-    - echo "Application successfully deployed."
+    - echo "Creating Release..."
+    - octo create-release --project Demo_Project --server https://mgtechsoft.octopus.app/ --apiKey API-WCYWZTZHUMG1XYT8ZBAQXI57IWITVRB
+    - echo "Deploy Release to UAT....."
+    - octo create-release --project Demo_Project --deployto UAT --server https://mgtechsoft.octopus.app/ --apiKey API-WCYWZTZHUMG1XYT8ZBAQXI57IWITVRB --progress
     
