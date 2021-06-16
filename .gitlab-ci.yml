@@ -33,7 +33,6 @@ myjob:
   script:
     - echo "Running unit tests"
     - docker --version
-    - docker run octopusdeploy/octo:7.4.3124
 
 
   
