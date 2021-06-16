@@ -32,10 +32,9 @@ unit-test-job:   # This job runs in the test stage.
    
 myjob:
   stage: myjob
-  image: docker:latest
   script:
     - echo "Running unit tests"
-    - docker --version
+
 
 
   
